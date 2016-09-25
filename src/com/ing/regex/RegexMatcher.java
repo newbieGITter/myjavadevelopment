@@ -44,7 +44,7 @@ public class RegexMatcher {
 	public boolean match_line_starting_with_word_ending_with_digit(String expression) throws Exception {
 		Pattern pattern = Pattern.compile("(^\\w.+)(digit(s)?=)(\\d+$)");
 		Matcher matcher = pattern.matcher(expression);
-		// printGroups(matcher);
+
 		if (matcher.matches()) {
 			String digit = matcher.group(2);
 			System.out.println(digit + matcher.group(3));
@@ -55,7 +55,7 @@ public class RegexMatcher {
 	}
 
 	public boolean match_any_word_but_from_b_to_d(String expression) throws Exception {
-		Pattern pattern = Pattern.compile("([a-z&&[^m-p]]|\\s)*");
+		Pattern pattern = Pattern.compile("([a-z&&[^b-d]]|\\s)*");
 		Matcher matcher = pattern.matcher(expression);
 
 		if (matcher.matches()) {

@@ -61,24 +61,32 @@ public class RegexMatcherShould {
 
 	@Test
 	public void throw_exception_for_illformatted_phone_number() throws Exception {
-		String illformatted_phone_number = "+91-998677483";
+		String illformatted_phone_number = "+91-988697483";
 		thrown.expectMessage("No match found: " + illformatted_phone_number);
 		matcher.match_phone_number(illformatted_phone_number);
 	}
 
 	@Test
 	public void return_true_for_valid_phone_number() throws Exception {
-		String valid_phone_nr = "+91-99 86 774 835";
+		String valid_phone_nr = "+91-98 86 974 835";
 		boolean hasMatched = matcher.match_phone_number(valid_phone_nr);
 		assertTrue(hasMatched);
 
-		valid_phone_nr = "+91-9986774835";
+		valid_phone_nr = "+91-9886974835";
 		hasMatched = matcher.match_phone_number(valid_phone_nr);
 		assertTrue(hasMatched);
 
-		valid_phone_nr = "+91-9986 774835";
+		valid_phone_nr = "+91-9886 974835";
 		hasMatched = matcher.match_phone_number(valid_phone_nr);
 		assertTrue(hasMatched);
+	}
+
+	@Test
+	public void throw_exception_for_line_starting_with_word_without_digit_at_the_end() throws Exception {
+		String expression = "This line starts with word and ends with digits=abc";
+		thrown.expectMessage("No match found: " + expression);
+
+		matcher.match_line_starting_with_word_ending_with_digit(expression);
 	}
 
 	@Test
@@ -87,6 +95,14 @@ public class RegexMatcherShould {
 
 		boolean hasMatched = matcher.match_line_starting_with_word_ending_with_digit(expression);
 		assertTrue(hasMatched);
+	}
+
+	@Test
+	public void throw_Exception_when_expression_contains_words_from_b_to_d() throws Exception {
+		String expression = "this is a text containing b";
+		thrown.expectMessage("No match found: " + expression);
+
+		matcher.match_any_word_but_from_b_to_d(expression);
 	}
 
 	@Test
